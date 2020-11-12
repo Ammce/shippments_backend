@@ -6,7 +6,9 @@ import { IBidsImplementation } from './Bids.implementation'
 
 
 export interface IBidsLogic {
-    createBid(user: BidsInput): Promise<DocumentType<Bids> | null>
+    createBid(bid: BidsInput): Promise<DocumentType<Bids> | null>
+    updateBid(bidId: string, data: { amount: number }): Promise<DocumentType<Bids> | null>
+    deleteBid(bidId: string,): Promise<boolean>
 }
 
 class BidsLogic implements IBidsLogic {
@@ -18,6 +20,16 @@ class BidsLogic implements IBidsLogic {
     async createBid({ amount, userId, shipmentId }: BidsInput): Promise<DocumentType<Bids> | null> {
         const bid = await this.bidsImplementation.createBid({ amount, userId, shipmentId })
         return bid;
+    }
+
+    async updateBid(bidId: string, data: { amount: number }): Promise<DocumentType<Bids> | null> {
+        const bid = await this.bidsImplementation.updateBid(bidId, data);
+        return bid;
+    }
+
+    async deleteBid(bidId: string): Promise<boolean> {
+        const deletedBid = await this.bidsImplementation.deleteBid(bidId);
+        return deletedBid
     }
 }
 
