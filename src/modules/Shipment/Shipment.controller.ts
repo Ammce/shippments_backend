@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { IShipmentLogic } from './Shipment.logic';
 
-export default class CardController {
+export default class ShipmentController {
     private shipmentLogic: IShipmentLogic
     constructor(shipmentLogic: IShipmentLogic) {
         this.shipmentLogic = shipmentLogic;

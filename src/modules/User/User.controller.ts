@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { IUserLogic } from './User.logic';
 
-export default class CardController {
+export default class UserController {
     private userLogic: IUserLogic
     constructor(userLogic: IUserLogic) {
         this.userLogic = userLogic;

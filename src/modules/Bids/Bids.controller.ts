@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { IBidsLogic } from './Bids.logic';
 
-export default class CardController {
+export default class BidsController {
     private bidsLogic: IBidsLogic
     constructor(bidsLogic: IBidsLogic) {
         this.bidsLogic = bidsLogic;
