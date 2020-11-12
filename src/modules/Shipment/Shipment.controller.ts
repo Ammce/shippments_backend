@@ -17,4 +17,13 @@ export default class ShipmentController {
             next(error);
         }
     }
+
+    public async getAllShipments(req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await this.shipmentLogic.getAllShipments();
+            res.status(200).json(data);
+        } catch (error) {
+            next(error);
+        }
+    }
 }

@@ -7,6 +7,7 @@ import { IShipmentImplementation } from './Shipment.implementation'
 
 export interface IShipmentLogic {
     createShipment(user: ShipmentInput): Promise<DocumentType<Shipment> | null>
+    getAllShipments(): Promise<DocumentType<Shipment>[]>
 }
 
 class ShipmentLogic implements IShipmentLogic {
@@ -18,6 +19,10 @@ class ShipmentLogic implements IShipmentLogic {
     async createShipment({ from, to }: ShipmentInput): Promise<DocumentType<Shipment> | null> {
         const shipment = await this.shipmentImplementation.createShipment({ from, to });
         return shipment;
+    }
+    async getAllShipments(): Promise<DocumentType<Shipment>[]> {
+        const shipments = await this.shipmentImplementation.getAllShipments();
+        return shipments;
     }
 }
 
