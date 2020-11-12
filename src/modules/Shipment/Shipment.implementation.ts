@@ -23,14 +23,6 @@ class ShipmentImplementation implements IShipmentImplementation {
                     foreignField: "shipmentId",
                     as: "bids"
                 }
-            },
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "bids.userId",
-                    foreignField: "_id",
-                    as: "bids.user"
-                }
             }
         ])
         return shipments;

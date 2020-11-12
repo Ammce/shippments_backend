@@ -38,4 +38,14 @@ export default class BidsController {
             next(error);
         }
     }
+
+    public async getAllBids(req: Request, res: Response, next: NextFunction) {
+        try {
+            console.log("OVDE SAm")
+            const data = await this.bidsLogic.getAllBids();
+            res.status(200).json(data);
+        } catch (error) {
+            next(error);
+        }
+    }
 }

@@ -7,6 +7,7 @@ export interface IBidsImplementation {
     createBid(bid: BidsInput): Promise<DocumentType<Bids> | null> | null
     updateBid(bidId: string, data: { amount: number }): Promise<DocumentType<Bids> | null>
     deleteBid(bidId: string,): Promise<boolean>
+    getAllBids(): Promise<DocumentType<Bids>[]>
 }
 
 class BidsImplementation implements IBidsImplementation {
@@ -27,6 +28,37 @@ class BidsImplementation implements IBidsImplementation {
             return true
         }
         return false;
+    }
+    async getAllBids(): Promise<DocumentType<Bids>[]> {
+        const allBids = await BidsModel.aggregate([
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $lookup: {
+                    from: "shipments",
+                    localField: "shipmentId",
+                    foreignField: "_id",
+                    as: "shipment"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$user"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$shipment"
+                }
+            }
+        ])
+        return allBids
     }
 }
 
